@@ -83,12 +83,8 @@ class Home extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () async {
-                          final List<ConnectivityResult> connectivityResult =
-                              await (Connectivity().checkConnectivity());
-
-                          if (connectivityResult
-                              .contains(ConnectivityResult.mobile)) {
-                            Navigator.push(
+                         
+                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => BlocProvider(
@@ -96,23 +92,6 @@ class Home extends StatelessWidget {
                                         child: SignIn(),
                                       )),
                             );
-                          } else if (connectivityResult
-                              .contains(ConnectivityResult.wifi)) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                        create: (_) => SignInCubit(),
-                                        child: SignIn(),
-                                      )),
-                            );
-                          }
-                       else{
-                           ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: Text("No internet"),
-                          ));
-                       }
                         },
                         child: const Text(
                           'Sign in first',
