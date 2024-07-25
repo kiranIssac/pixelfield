@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/Repository/mock_api.dart';
 import 'package:flutter_application_2/controller/signin_cubit.dart';
@@ -16,7 +17,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(debugShowCheckedModeBanner: false,
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Home(),
     );
   }
@@ -27,7 +29,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( backgroundColor: Color(0xff0B1519),
+    return Scaffold(
+      backgroundColor: Color(0xff0B1519),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -36,7 +39,7 @@ class Home extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xff122329),
+                  color: const Color(0xff122329),
                   border: Border.all(
                     color: const Color(0xff122329),
                   ),
@@ -62,10 +65,10 @@ class Home extends StatelessWidget {
                               MaterialStatePropertyAll(Color(0xffD49A00))),
                       onPressed: () {},
                       child: const Padding(
-                         padding: EdgeInsets.only(left: 40,right: 40),
-                
+                        padding: EdgeInsets.only(left: 40, right: 40),
                         child: Text('Scan bottle',
-                            style: TextStyle(fontSize: 18, color: Colors.black)),
+                            style:
+                                TextStyle(fontSize: 18, color: Colors.black)),
                       )),
                   const SizedBox(
                     height: 15,
@@ -79,15 +82,37 @@ class Home extends StatelessWidget {
                         width: 10,
                       ),
                       InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                      create: (_) => SignInCubit(),
-                                      child: SignIn(),
-                                    )),
-                          );
+                        onTap: () async {
+                          final List<ConnectivityResult> connectivityResult =
+                              await (Connectivity().checkConnectivity());
+
+                          if (connectivityResult
+                              .contains(ConnectivityResult.mobile)) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                        create: (_) => SignInCubit(),
+                                        child: SignIn(),
+                                      )),
+                            );
+                          } else if (connectivityResult
+                              .contains(ConnectivityResult.wifi)) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                        create: (_) => SignInCubit(),
+                                        child: SignIn(),
+                                      )),
+                            );
+                          }
+                       else{
+                           ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("No internet"),
+                          ));
+                       }
                         },
                         child: const Text(
                           'Sign in first',
