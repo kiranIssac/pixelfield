@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false,
+    return const MaterialApp(debugShowCheckedModeBanner: false,
       home: Home(),
     );
   }
@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( backgroundColor: Color(0xff0B1519),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -44,38 +44,38 @@ class Home extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  Text(
+                  const Text(
                     'Welcome!',
                     style: TextStyle(fontSize: 24, color: Colors.white),
                   ),
-                  Text('Text text text',
+                  const Text('Text text text',
                       style: TextStyle(fontSize: 18, color: Colors.white)),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                           backgroundColor:
                               MaterialStatePropertyAll(Color(0xffD49A00))),
                       onPressed: () {},
-                      child: Padding(
-                         padding: const EdgeInsets.only(left: 40,right: 40),
+                      child: const Padding(
+                         padding: EdgeInsets.only(left: 40,right: 40),
                 
                         child: Text('Scan bottle',
                             style: TextStyle(fontSize: 18, color: Colors.black)),
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Have an account?',
+                      const Text('Have an account?',
                           style: TextStyle(fontSize: 16, color: Colors.white)),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       InkWell(
@@ -89,7 +89,7 @@ class Home extends StatelessWidget {
                                     )),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           'Sign in first',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class Home extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   )
                 ],

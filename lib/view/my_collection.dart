@@ -35,12 +35,12 @@ class _MyCollectionState extends State<MyCollection> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Color(0xff0B1519),
-      appBar: AppBar(backgroundColor: Color(0xff0B1519),foregroundColor: Colors.white,
-        title: Text('My collection'),
+    return Scaffold(backgroundColor: const Color(0xff0B1519),
+      appBar: AppBar(backgroundColor: const Color(0xff0B1519),foregroundColor: Colors.white,
+        title: const Text('My collection'),
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications_active),
+            icon: const Icon(Icons.notifications_active),
             onPressed: () {
               // Handle icon button press
             },
@@ -54,17 +54,17 @@ class _MyCollectionState extends State<MyCollection> {
                 future: _fetchItems(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center(child: Text('No data available'));
+                    return const Center(child: Text('No data available'));
                   } else {
                     final items = snapshot.data!;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .65,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .65,
                           crossAxisCount: 2,
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 10.0,
@@ -103,7 +103,7 @@ class _MyCollectionState extends State<MyCollection> {
                                      Align(alignment: Alignment.centerLeft,
                                        child: Text(
                                           item.title,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.white, fontSize: 17),
                                         ),
                                      ),
@@ -121,7 +121,7 @@ class _MyCollectionState extends State<MyCollection> {
                 },
               ),
           )
-          : Center(child: Text('Empty Page')),
+          : const Center(child: Text('Empty Page')),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -150,45 +150,4 @@ class _MyCollectionState extends State<MyCollection> {
     );
   }
 
-  Widget _buildBody() {
-    switch (_selectedIndex) {
-      case 0:
-        return _buildGridView(); // Display GridView for Home
-      case 1:
-      case 2:
-      case 3:
-        return Center(
-            child: Text('Empty Page')); // Display empty page for other tabs
-      default:
-        return Center(child: Text('No Content'));
-    }
-  }
-
-  Widget _buildGridView() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
-        ),
-        itemCount: 20,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.blueAccent,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: Text(
-                'Item $index',
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
 }
