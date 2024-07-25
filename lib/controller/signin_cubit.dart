@@ -5,7 +5,7 @@ class SignInCubit extends Cubit<bool> {
 
   void signIn(String username, String password) {
     // Replace this with actual sign-in logic
-    if (username == 'e' && password == 'p') {
+    if (username == '' && password == '') {
       
       emit(true); // Sign-in successful
     } else {
