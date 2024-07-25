@@ -22,11 +22,11 @@ class SignIn extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text('Sign In',style: TextStyle(fontSize: 22, color: Colors.white))),
               SizedBox(height: 35,),
-            TextField(
+            TextField(style: TextStyle(color: Colors.white),
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Email',labelStyle: TextStyle(color: Color(0xffD49A00))),
+              decoration: InputDecoration(labelText: 'Email',labelStyle: TextStyle(color: Color(0xffD49A00)),),
             ),
-            TextField(
+            TextField(style: TextStyle(color: Colors.white),
               controller: _passwordController,
               decoration: InputDecoration(labelText: 'Password',labelStyle: TextStyle(color: Color(0xffD49A00))),
               obscureText: true,
