@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_2/controller/signin_cubit.dart';
 import 'package:flutter_application_2/main.dart';
 import 'package:flutter_application_2/view/my_collection.dart';
@@ -10,20 +11,24 @@ class SignIn extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Sign In')),
+    return Scaffold(backgroundColor: const Color(0xff122329),
+      appBar: AppBar(backgroundColor: const Color(0xff122329),foregroundColor: Colors.white,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text('Sign In',style: TextStyle(fontSize: 22, color: Colors.white))),
+              SizedBox(height: 35,),
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              decoration: InputDecoration(labelText: 'Email',labelStyle: TextStyle(color: Color(0xffD49A00))),
             ),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(labelText: 'Password',labelStyle: TextStyle(color: Color(0xffD49A00))),
               obscureText: true,
             ),
             SizedBox(height: 20),
@@ -44,12 +49,18 @@ class SignIn extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
+               style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Color(0xffD49A00))),
               onPressed: () {
                 final username = _usernameController.text;
                 final password = _passwordController.text;
                 context.read<SignInCubit>().signIn(username, password);
               },
-              child: Text('Sign In'),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 40,right: 40),
+                child: Text('Continue', style: TextStyle(fontSize: 16, color: Colors.black,fontWeight: FontWeight.bold,)),
+              ),
             ),
           ],
         ),

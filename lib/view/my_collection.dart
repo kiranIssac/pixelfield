@@ -35,12 +35,12 @@ class _MyCollectionState extends State<MyCollection> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('App Bar Heading'),
+    return Scaffold(backgroundColor: Color(0xff0B1519),
+      appBar: AppBar(backgroundColor: Color(0xff0B1519),foregroundColor: Colors.white,
+        title: Text('My collection'),
         actions: [
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.notifications_active),
             onPressed: () {
               // Handle icon button press
             },
@@ -48,67 +48,79 @@ class _MyCollectionState extends State<MyCollection> {
         ],
       ),
       body: _selectedIndex == 0
-          ? FutureBuilder<List<Item>>(
-              future: _fetchItems(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No data available'));
-                } else {
-                  final items = snapshot.data!;
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                      ),
-                      itemCount: items.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final item = items[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(item: item),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              children: [
-                                  Image.asset(
-                            item.image,
-                            width: 100,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                                Center(
-                                  child: Text(
-                                    item.title,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
-                                  ),
+          ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder<List<Item>>(
+                future: _fetchItems(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(child: Text('No data available'));
+                  } else {
+                    final items = snapshot.data!;
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .65,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                        ),
+                        itemCount: items.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final item = items[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailPage(item: item),
                                 ),
-                              ],
+                              );
+                            },
+                            child: Container(
+                              
+                              decoration: BoxDecoration(
+                                color: const Color(0xff122329),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Column(
+                                  children: [
+                                    
+                                    SizedBox(height: 30,),
+                                      Image.asset(
+                                item.image,
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.cover,
+                                                            ),
+                                                             SizedBox(height: 30,),
+                                     Align(alignment: Alignment.centerLeft,
+                                       child: Text(
+                                          item.title,
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 17),
+                                        ),
+                                     ),
+                                    
+                                    
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                }
-              },
-            )
+                          );
+                        },
+                      ),
+                    );
+                  }
+                },
+              ),
+          )
           : Center(child: Text('Empty Page')),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

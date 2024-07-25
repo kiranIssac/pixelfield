@@ -13,46 +13,6 @@ void main() {
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
-  // List<int>? twoSum(List<int> nums, int target) {
-  //   Map<int, int> hashMap = {};
-  //   for (int i = 0; i < nums.length; i++) {
-  //     int x = target - nums[i];
-
-  //     if (hashMap.containsKey(x)) {
-  //       return [i, hashMap[x]!];
-  //     }
-  //     hashMap[nums[i]] = i;
-  //   }
-  //   return null;
-  // }
-
-  // bool checkRepeatation(int start, int end, s) {
-  //   Set<String> chars = Set<String>();
-
-  //   for (int i = start; i < end; i++) {
-  //     String char = s.substring(i, i + 1);
-
-  //     if (chars.contains(char)) {
-  //       return false;
-  //     }
-  //     chars.add(char);
-  //   }
-  //   return true;
-  // }
-
-  // int? lengthOfLongestSubstring(String s) {
-  //   int n = s.length;
-
-  //   int max1 = 0;
-  //   for (int i = 0; i < n; i++) {
-  //     for (int j = i; j < n; j++) {
-  //       if (checkRepeatation(i, j, s)) {
-  //         max1 = max(max1, j - i + 1);
-  //       }
-  //     }
-  //   }
-  //   return max1;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,23 +35,38 @@ class Home extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
-              color: Color(0xff122329),
+              decoration: BoxDecoration(
+                color: const Color(0xff122329),
+                  border: Border.all(
+                    color: const Color(0xff122329),
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 15,
+                  ),
                   Text(
                     'Welcome!',
                     style: TextStyle(fontSize: 24, color: Colors.white),
                   ),
                   Text('Text text text',
                       style: TextStyle(fontSize: 18, color: Colors.white)),
+                  SizedBox(
+                    height: 10,
+                  ),
                   ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStatePropertyAll(Color(0xffD49A00))),
                       onPressed: () {},
-                      child: Text('Scan bottle',
-                          style: TextStyle(fontSize: 18, color: Colors.black))),
+                      child: Padding(
+                         padding: const EdgeInsets.only(left: 40,right: 40),
+                
+                        child: Text('Scan bottle',
+                            style: TextStyle(fontSize: 18, color: Colors.black)),
+                      )),
                   SizedBox(
                     height: 15,
                   ),
@@ -99,7 +74,7 @@ class Home extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Have an account?',
-                          style: TextStyle(fontSize: 18, color: Colors.white)),
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
                       SizedBox(
                         width: 10,
                       ),
@@ -117,10 +92,14 @@ class Home extends StatelessWidget {
                         child: Text(
                           'Sign in first',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xffD49A00)),
                         ),
                       )
                     ],
+                  ),
+                  SizedBox(
+                    height: 25,
                   )
                 ],
               ),
