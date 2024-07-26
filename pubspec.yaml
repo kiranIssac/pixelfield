@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  http: ^1.2.2
   dio: ^5.5.0+1
   connectivity_plus: ^6.0.3
   shared_preferences: ^2.2.3
